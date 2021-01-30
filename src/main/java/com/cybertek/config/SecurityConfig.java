@@ -38,19 +38,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 ).permitAll()
                 .and()
                 .formLogin()
-                    .loginPage("/login")
+                .loginPage("/login")
 //                    .defaultSuccessUrl("/welcome")
-                    .successHandler(authSuccessHandler)
-                    .failureUrl("/login?error=true")
-                    .permitAll()
+                .successHandler(authSuccessHandler)
+                .failureUrl("/login?error=true")
+                .permitAll()
                 .and()
                 .logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/login")
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login")
                 .and()
                 .rememberMe()
-                    .tokenValiditySeconds(120)
-                    .key("cybertekSecret")
-                    .userDetailsService(securityService);
-        }
+                .tokenValiditySeconds(120)
+                .key("cybertekSecret")
+                .userDetailsService(securityService);
+    }
 }
