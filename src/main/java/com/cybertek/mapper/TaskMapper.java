@@ -14,11 +14,11 @@ public class TaskMapper {
         this.modelMapper = modelMapper;
     }
 
-    public Task convertToEntity(TaskDTO dto){
-        return modelMapper.map(dto,Task.class);
+    public Task convertToEntity(TaskDTO dto) {
+        return modelMapper.map(dto, Task.class);
     }
 
-    public TaskDTO convertToDto(Task entity){
-        return modelMapper.map(entity,TaskDTO.class);
+    public TaskDTO convertToDto(Task entity) {
+        return modelMapper.map(entity, TaskDTO.class);
     }
 }

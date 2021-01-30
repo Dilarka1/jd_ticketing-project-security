@@ -35,92 +35,66 @@ public class ProjectController {
 
 
     @GetMapping("/create")
-    public String createProject(Model model){
+    public String createProject(Model model) {
 
-        model.addAttribute("project",new ProjectDTO());
-        model.addAttribute("projects",projectService.listAllProjects());
-        model.addAttribute("managers",userService.listAllByRole("manager"));
+        model.addAttribute("project", new ProjectDTO());
+        model.addAttribute("projects", projectService.listAllProjects());
+        model.addAttribute("managers", userService.listAllByRole("manager"));
 
         return "/project/create";
     }
 
     @PostMapping("/create")
-    public String insertProject(ProjectDTO project){
+    public String insertProject(ProjectDTO project) {
         projectService.save(project);
         return "redirect:/project/create";
-
     }
 
     @GetMapping("/delete/{projectcode}")
-    public String deleteProject(@PathVariable("projectcode") String projectcode){
+    public String deleteProject(@PathVariable("projectcode") String projectcode) {
 
         projectService.delete(projectcode);
         return "redirect:/project/create";
     }
 
-
     @GetMapping("/complete/{projectcode}")
-    public String completeProject(@PathVariable("projectcode") String projectcode){
+    public String completeProject(@PathVariable("projectcode") String projectcode) {
         projectService.complete(projectcode);
         return "redirect:/project/create";
     }
 
-
     @GetMapping("/update/{projectcode}")
-    public String editProject(@PathVariable("projectcode") String projectcode,Model model){
+    public String editProject(@PathVariable("projectcode") String projectcode, Model model) {
 
-        model.addAttribute("project",projectService.getByProjectCode(projectcode));
-        model.addAttribute("projects",projectService.listAllProjects());
-        model.addAttribute("managers",userService.listAllByRole("manager"));
+        model.addAttribute("project", projectService.getByProjectCode(projectcode));
+        model.addAttribute("projects", projectService.listAllProjects());
+        model.addAttribute("managers", userService.listAllByRole("manager"));
 
         return "/project/update";
     }
 
     @PostMapping("/update/{projectcode}")
-    public String updateProject(@PathVariable("projectcode") String projectcode,ProjectDTO project){
+    public String updateProject(@PathVariable("projectcode") String projectcode, ProjectDTO project) {
 
         projectService.update(project);
 
         return "redirect:/project/create";
     }
 
-
     @GetMapping("/manager/complete")
-    public String getProjectByManager(Model model){
+    public String getProjectByManager(Model model) {
 
         List<ProjectDTO> projects = projectService.listAllProjectDetails();
-        model.addAttribute("projects",projects);
+        model.addAttribute("projects", projects);
 
         return "/manager/project-status";
     }
 
     @GetMapping("/manager/complete/{projectCode}")
-    public String manager_completed(@PathVariable("projectCode") String projectCode,Model model){
+    public String manager_completed(@PathVariable("projectCode") String projectCode, Model model) {
 
         projectService.complete(projectCode);
 
         return "redirect:/project/manager/complete";
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

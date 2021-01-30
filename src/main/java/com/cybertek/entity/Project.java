@@ -33,6 +33,4 @@ public class Project extends BaseEntity {
     private Status projectStatus;
 
     private String projectDetail;
-
-
 }

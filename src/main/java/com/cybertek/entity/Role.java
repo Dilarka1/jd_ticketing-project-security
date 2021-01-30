@@ -21,5 +21,4 @@ import java.util.List;
 public class Role extends BaseEntity {
 
     private String description;
-
 }

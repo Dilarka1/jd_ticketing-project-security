@@ -21,17 +21,14 @@ public class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false,updatable = false)
+    @Column(nullable = false, updatable = false)
     public LocalDateTime insertDateTime;
-    @Column(nullable = false,updatable = false)
+    @Column(nullable = false, updatable = false)
     public Long insertUserId;
     @Column(nullable = false)
     public LocalDateTime lastUpdateDateTime;
     @Column(nullable = false)
     public Long lastUpdateUserId;
 
-    private Boolean isDeleted=false;
-
-
-
+    private Boolean isDeleted = false;
 }

@@ -20,8 +20,6 @@ public class ProjectDTO {
     private String projectCode;
     private UserDTO assignedManager;
 
-
-
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
 
@@ -33,6 +31,4 @@ public class ProjectDTO {
 
     private int completeTaskCounts;
     private int unfinishedTaskCounts;
-
-
 }

@@ -22,5 +22,4 @@ public class TaskDTO {
     private String taskDetail;
     private Status taskStatus;
     private LocalDate assignedDate;
-
 }

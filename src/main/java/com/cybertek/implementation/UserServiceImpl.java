@@ -41,13 +41,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDTO> listAllUsers() {
         List<User> list = userRepository.findAll(Sort.by("firstName"));
-        return list.stream().map(obj -> mapperUtil.convert(obj,new UserDTO())).collect(Collectors.toList());
+        return list.stream().map(obj -> mapperUtil.convert(obj, new UserDTO())).collect(Collectors.toList());
     }
 
     @Override
     public UserDTO findByUserName(String username) {
         User user = userRepository.findByUserName(username);
-        return mapperUtil.convert(user,new UserDTO());
+        return mapperUtil.convert(user, new UserDTO());
     }
 
     @Override
@@ -56,9 +56,9 @@ public class UserServiceImpl implements UserService {
         User foundUser = userRepository.findByUserName(dto.getUserName());
         dto.setEnabled(true);
 
-       User obj =  mapperUtil.convert(dto,new User());
-       obj.setPassWord(passwordEncoder.encode(obj.getPassWord()));
-       userRepository.save(obj);
+        User obj = mapperUtil.convert(dto, new User());
+        obj.setPassWord(passwordEncoder.encode(obj.getPassWord()));
+        userRepository.save(obj);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
         //Find current user
         User user = userRepository.findByUserName(dto.getUserName());
         //Map update user dto to entity object
-        User convertedUser = mapperUtil.convert(dto,new User());
+        User convertedUser = mapperUtil.convert(dto, new User());
         convertedUser.setPassWord(passwordEncoder.encode(convertedUser.getPassWord()));
         convertedUser.setEnabled(true);
 
@@ -83,11 +83,11 @@ public class UserServiceImpl implements UserService {
     public void delete(String username) throws TicketingProjectException {
         User user = userRepository.findByUserName(username);
 
-        if(user == null){
+        if (user == null) {
             throw new TicketingProjectException("User Does Not Exists");
         }
 
-        if(!checkIfUserCanBeDeleted(user)){
+        if (!checkIfUserCanBeDeleted(user)) {
             throw new TicketingProjectException("User can not be deleted. It is linked by a project ot task");
         }
 
@@ -107,13 +107,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDTO> listAllByRole(String role) {
         List<User> users = userRepository.findAllByRoleDescriptionIgnoreCase(role);
-        return users.stream().map(obj -> {return mapperUtil.convert(obj,new UserDTO());}).collect(Collectors.toList());
+        return users.stream().map(obj -> {
+            return mapperUtil.convert(obj, new UserDTO());
+        }).collect(Collectors.toList());
     }
 
     @Override
     public Boolean checkIfUserCanBeDeleted(User user) {
 
-        switch(user.getRole().getDescription()){
+        switch (user.getRole().getDescription()) {
             case "Manager":
                 List<ProjectDTO> projectList = projectService.readAllByAssignedManager(user);
                 return projectList.size() == 0;
